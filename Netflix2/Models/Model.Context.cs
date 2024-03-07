@@ -25,7 +25,7 @@ namespace Netflix2.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<KhachHang> KhachHangs { get; set; }
-        public virtual DbSet<Phim> Phims { get; set; }
+        public virtual DbSet<KhachHang> KhachHang { get; set; }
+        public virtual DbSet<Phim> Phim { get; set; }
     }
 }

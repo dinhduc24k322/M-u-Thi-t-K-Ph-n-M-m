@@ -20,7 +20,8 @@ namespace Netflix2.Controllers
         {
             using (var dbContext = new XemPhimEntities())
             {
-                var items = dbContext.Phims.ToList();
+                
+                var items = dbContext.Phim.ToList();
 
                 return View(items);
             }
@@ -47,7 +48,7 @@ namespace Netflix2.Controllers
                 }
                 if (ModelState.IsValid)
                 {
-                    database.Phims.Add(phim);
+                    database.Phim.Add(phim);
                     database.SaveChanges();
                 }
                 else
@@ -60,7 +61,7 @@ namespace Netflix2.Controllers
         public ActionResult SuaPhim(int Id)
         {
             XemPhimEntities database = new XemPhimEntities();
-            Phim e = database.Phims.Where(i => i.IdPhim == Id).FirstOrDefault();
+            Phim e = database.Phim.Where(i => i.IdPhim == Id).FirstOrDefault();
 
             database.Dispose();
             return View(e);
@@ -68,7 +69,7 @@ namespace Netflix2.Controllers
         public ActionResult LuuPhim(Phim s)
         {
             XemPhimEntities database = new XemPhimEntities();
-            Phim e = database.Phims.Where(i => i.IdPhim == s.IdPhim).FirstOrDefault();
+            Phim e = database.Phim.Where(i => i.IdPhim == s.IdPhim).FirstOrDefault();
             e.TieuDe = s.TieuDe;
             e.ChiTietPhim = s.ChiTietPhim;
             e.TenPhim = s.TenPhim;
@@ -86,7 +87,7 @@ namespace Netflix2.Controllers
         public ActionResult XoaPhim(int Id)
         {
             XemPhimEntities database = new XemPhimEntities();
-            Phim e = database.Phims.Where(i => i.IdPhim == Id).FirstOrDefault();
+            Phim e = database.Phim.Where(i => i.IdPhim == Id).FirstOrDefault();
 
             database.Dispose();
             return View(e);
@@ -94,9 +95,9 @@ namespace Netflix2.Controllers
         public ActionResult XacNhanXoaPhim(Phim s)
         {
             XemPhimEntities database = new XemPhimEntities();
-            Phim e = database.Phims.Where(i => i.IdPhim == s.IdPhim).FirstOrDefault();
+            Phim e = database.Phim.Where(i => i.IdPhim == s.IdPhim).FirstOrDefault();
 
-            database.Phims.Remove(e);
+            database.Phim.Remove(e);
             database.SaveChanges();
             database.Dispose();
             return Redirect("QuanLyPhim");
@@ -105,7 +106,7 @@ namespace Netflix2.Controllers
         {
             using (var dbContext = new XemPhimEntities())
             {
-                var items = dbContext.KhachHangs.ToList();
+                var items = dbContext.KhachHang.ToList();
 
                 return View(items);
             }
@@ -114,7 +115,7 @@ namespace Netflix2.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existingEmail = database.KhachHangs.FirstOrDefault(k => k.Email == khachHang.Email);
+                var existingEmail = database.KhachHang.FirstOrDefault(k => k.Email == khachHang.Email);
                 if (existingEmail != null)
                 {
                     ModelState.AddModelError(String.Empty, "Địa chỉ Email đã được sử dụng, vui lòng chọn địa chỉ Email khác.");
@@ -141,7 +142,7 @@ namespace Netflix2.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    database.KhachHangs.Add(khachHang);
+                    database.KhachHang.Add(khachHang);
                     database.SaveChanges();
                     return RedirectToAction("QuanLyUser");
                 }
@@ -153,7 +154,7 @@ namespace Netflix2.Controllers
         public ActionResult SuaUser(int Id)
         {
             XemPhimEntities database = new XemPhimEntities();
-            KhachHang e = database.KhachHangs.Where(i => i.MaKH == Id).FirstOrDefault();
+            KhachHang e = database.KhachHang.Where(i => i.MaKH == Id).FirstOrDefault();
 
             if (e != null)
             {
@@ -183,7 +184,7 @@ namespace Netflix2.Controllers
         public ActionResult LuuUser(KhachHang s)
         {
             XemPhimEntities database = new XemPhimEntities();
-            KhachHang e = database.KhachHangs.Where(i => i.MaKH == s.MaKH).FirstOrDefault();
+            KhachHang e = database.KhachHang.Where(i => i.MaKH == s.MaKH).FirstOrDefault();
             e.TenDangNhap = s.TenDangNhap;
             e.HoTenKH = s.HoTenKH;
             e.MatKhau = s.MatKhau;
@@ -196,7 +197,7 @@ namespace Netflix2.Controllers
         public ActionResult XoaUser(int Id)
         {
             XemPhimEntities database = new XemPhimEntities();
-            KhachHang e = database.KhachHangs.Where(i => i.MaKH == Id).FirstOrDefault();
+            KhachHang e = database.KhachHang.Where(i => i.MaKH == Id).FirstOrDefault();
 
             database.Dispose();
             return View(e);
@@ -204,9 +205,9 @@ namespace Netflix2.Controllers
         public ActionResult XacNhanXoaUser(KhachHang s)
         {
             XemPhimEntities database = new XemPhimEntities();
-            KhachHang e = database.KhachHangs.Where(i => i.MaKH == s.MaKH).FirstOrDefault();
+            KhachHang e = database.KhachHang.Where(i => i.MaKH == s.MaKH).FirstOrDefault();
 
-            database.KhachHangs.Remove(e);
+            database.KhachHang.Remove(e);
             database.SaveChanges();
             database.Dispose();
             return Redirect("QuanLyUser");

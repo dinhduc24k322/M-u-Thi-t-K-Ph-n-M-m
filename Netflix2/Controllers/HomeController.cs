@@ -14,7 +14,7 @@ namespace Netflix2.Controllers
         {
             using (var dbContext = new XemPhimEntities())
             {
-                var items = dbContext.Phims.ToList();
+                var items = dbContext.Phim.ToList();
 
                 return View(items);
             }
@@ -45,17 +45,17 @@ namespace Netflix2.Controllers
         }
         public ActionResult ChiTietPhim(int Id)
         {
-            var Phim = database.Phims.FirstOrDefault(s => s.IdPhim == Id);
+            var Phim = database.Phim.FirstOrDefault(s => s.IdPhim == Id);
             return View(Phim);
         }
         public ActionResult XemPhim(int Id)
         {
-            var Phim = database.Phims.FirstOrDefault(s => s.IdPhim == Id);
+            var Phim = database.Phim.FirstOrDefault(s => s.IdPhim == Id);
             return View(Phim);
         }
         public ActionResult TimKiem(string searching)
         {
-            return View(database.Phims.Where(x => x.TenPhim.Contains(searching) || searching == null).ToList());
+            return View(database.Phim.Where(x => x.TenPhim.Contains(searching) || searching == null).ToList());
         }
     }
 }

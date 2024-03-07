@@ -67,8 +67,8 @@
           <Property Name="DaoDien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="XemPhimEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
-          <EntitySet Name="Phims" EntityType="Self.Phim" />
+          <EntitySet Name="KhachHang" EntityType="Self.KhachHang" />
+          <EntitySet Name="Phim" EntityType="Self.Phim" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -76,7 +76,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="XemPhimModelStoreContainer" CdmEntityContainer="XemPhimEntities">
-          <EntitySetMapping Name="KhachHangs">
+          <EntitySetMapping Name="KhachHang">
             <EntityTypeMapping TypeName="XemPhimModel.KhachHang">
               <MappingFragment StoreEntitySet="KhachHang">
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
@@ -87,7 +87,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Phims">
+          <EntitySetMapping Name="Phim">
             <EntityTypeMapping TypeName="XemPhimModel.Phim">
               <MappingFragment StoreEntitySet="Phim">
                 <ScalarProperty Name="IdPhim" ColumnName="IdPhim" />
@@ -118,7 +118,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

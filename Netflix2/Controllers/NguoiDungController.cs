@@ -38,10 +38,10 @@ namespace Netflix2.Controllers
                 if (kh.MatKhau.Length < 6)
                     ModelState.AddModelError(string.Empty, "Mật Khẩu không được ít hơn 6 ký tự");
 
-                var khachhang = database.KhachHangs.FirstOrDefault(k => k.TenDangNhap== kh.TenDangNhap);
+                var khachhang = database.KhachHang.FirstOrDefault(k => k.TenDangNhap== kh.TenDangNhap);
                 if (khachhang != null)
                     ModelState.AddModelError(string.Empty, "Đã có người đăng ký tên này");
-                var khEmail = database.KhachHangs.FirstOrDefault(k => k.Email == kh.Email);
+                var khEmail = database.KhachHang.FirstOrDefault(k => k.Email == kh.Email);
                 if (khEmail != null)
                     ModelState.AddModelError(string.Empty, "Đã có người đăng ký Email này");
                 else if (!kh.Email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase))
@@ -49,7 +49,7 @@ namespace Netflix2.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    database.KhachHangs.Add(kh);
+                    database.KhachHang.Add(kh);
                     database.SaveChanges();
                 }
                 else
@@ -72,7 +72,7 @@ namespace Netflix2.Controllers
                     return RedirectToAction("QuanLyPhim", "Admin");
                 if (ModelState.IsValid)
                 {
-                    var khach = database.KhachHangs.FirstOrDefault(k => k.TenDangNhap == kh.TenDangNhap && k.MatKhau == kh.MatKhau);
+                    var khach = database.KhachHang.FirstOrDefault(k => k.TenDangNhap == kh.TenDangNhap && k.MatKhau == kh.MatKhau);
                     if (khach != null)
                     {
                         ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";
@@ -94,7 +94,7 @@ namespace Netflix2.Controllers
 
         public ActionResult ChiTietUser(string tkkh)
         {
-            var User = UserDataBase.KhachHangs.FirstOrDefault(s => s.TenDangNhap == tkkh);
+            var User = UserDataBase.KhachHang.FirstOrDefault(s => s.TenDangNhap == tkkh);
             return View(User);
         }
 
