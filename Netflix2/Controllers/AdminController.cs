@@ -1,4 +1,6 @@
-﻿using Netflix2.Controllers.Observer;
+﻿using Netflix2.Controllers.Command;
+using Netflix2.Controllers.Observer;
+using Netflix2.Controllers.Responsitory;
 using Netflix2.Models;
 using System;
 using System.Collections.Generic;
@@ -13,11 +15,17 @@ namespace Netflix2.Controllers
 {
     public class AdminController : Controller, IKhachHangObserver
     {
+        private KhachHangRepository khachHangRepository;
+
         private KhachHangSubject khachHangSubject = new KhachHangSubject();
         // GET: Admin
         XemPhimEntities database = new XemPhimEntities();
         // GET: Admin
         //Hiện thông tin các bộ Phim
+        public AdminController()
+        {
+            khachHangRepository = new KhachHangRepository();
+        }
         public ActionResult QuanLyPhim()
         {
             using (var dbContext = new XemPhimEntities())
@@ -149,7 +157,6 @@ namespace Netflix2.Controllers
                     return RedirectToAction("QuanLyUser");
                 }
             }
-
             // Nếu ModelState không hợp lệ, quay lại view để hiển thị lỗi
             return View();
         }
@@ -221,26 +228,48 @@ namespace Netflix2.Controllers
             // Xử lý cập nhật khi có thay đổi
             // Ví dụ: gửi email hoặc cập nhật dữ liệu khác
         }
+        //public ActionResult LuuUser(KhachHang s)
+        //{
+        //    XemPhimEntities database = new XemPhimEntities();
+        //    KhachHang e = database.KhachHang.Where(i => i.MaKH == s.MaKH).FirstOrDefault();
+        //    e.TenDangNhap = s.TenDangNhap;
+        //    e.HoTenKH = s.HoTenKH;
+        //    e.MatKhau = s.MatKhau;
+        //    e.Email = s.Email;
+
+        //    database.SaveChanges();
+        //    database.Dispose();
+        //    return Redirect("QuanLyUser");
+        //}
         public ActionResult LuuUser(KhachHang s)
         {
-            XemPhimEntities database = new XemPhimEntities();
-            KhachHang e = database.KhachHang.Where(i => i.MaKH == s.MaKH).FirstOrDefault();
-            e.TenDangNhap = s.TenDangNhap;
-            e.HoTenKH = s.HoTenKH;
-            e.MatKhau = s.MatKhau;
-            e.Email = s.Email;
+            IUserCommand saveUserCommand = new SaveUserCommand();
+            saveUserCommand.Execute(s);
 
-            database.SaveChanges();
-            database.Dispose();
-            return Redirect("QuanLyUser");
+            return RedirectToAction("QuanLyUser");
         }
+        //public ActionResult XoaUser(int Id)
+        //{
+        //    XemPhimEntities database = new XemPhimEntities();
+        //    KhachHang e = database.KhachHang.Where(i => i.MaKH == Id).FirstOrDefault();
+
+        //    database.Dispose();
+        //    return View(e);
+        //}
         public ActionResult XoaUser(int Id)
         {
-            XemPhimEntities database = new XemPhimEntities();
-            KhachHang e = database.KhachHang.Where(i => i.MaKH == Id).FirstOrDefault();
+            KhachHang e = khachHangRepository.GetById(Id);
 
-            database.Dispose();
-            return View(e);
+            if (e == null)
+            {
+                // Xử lý trường hợp không tìm thấy người dùng
+                return RedirectToAction("QuanLyUser");
+            }
+
+            khachHangRepository.Delete(e);
+            khachHangRepository.Dispose();
+
+            return RedirectToAction("QuanLyUser");
         }
         public ActionResult XacNhanXoaUser(KhachHang s)
         {
