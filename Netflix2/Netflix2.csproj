@@ -129,8 +129,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Factory Method\IPhimFactory.cs" />
+    <Compile Include="Controllers\Factory Method\PhimFactory.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
+    <Compile Include="Controllers\Decorator\EmailFormatValidationDecorator.cs" />
+    <Compile Include="Controllers\Decorator\EmailValidationDecorator.cs" />
+    <Compile Include="Controllers\Decorator\FullNameValidationDecorator.cs" />
+    <Compile Include="Controllers\Decorator\IUserValidation.cs" />
+    <Compile Include="Controllers\Decorator\PasswordValidationDecorator.cs" />
+    <Compile Include="Controllers\Decorator\UsernameValidationDecorator.cs" />
+    <Compile Include="Controllers\Observer\IKhachHangObserver.cs" />
+    <Compile Include="Controllers\Observer\KhachHangSubject.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -257,7 +267,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Chain of Responsibility\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

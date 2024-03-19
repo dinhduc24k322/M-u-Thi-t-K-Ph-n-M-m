@@ -1,4 +1,5 @@
-﻿using Netflix2.Models;
+﻿using Netflix2.Controllers.Observer;
+using Netflix2.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,8 +11,9 @@ using System.Web.Mvc;
 
 namespace Netflix2.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : Controller, IKhachHangObserver
     {
+        private KhachHangSubject khachHangSubject = new KhachHangSubject();
         // GET: Admin
         XemPhimEntities database = new XemPhimEntities();
         // GET: Admin
@@ -151,36 +153,74 @@ namespace Netflix2.Controllers
             // Nếu ModelState không hợp lệ, quay lại view để hiển thị lỗi
             return View();
         }
+        //public ActionResult SuaUser(int Id)
+        //{
+        //    XemPhimEntities database = new XemPhimEntities();
+        //    KhachHang e = database.KhachHang.Where(i => i.MaKH == Id).FirstOrDefault();
+
+        //    if (e != null)
+        //    {
+        //        // Kiểm tra hợp lệ cho email, họ tên và tên đăng nhập
+        //        if (String.IsNullOrEmpty(e.TenDangNhap) || e.TenDangNhap.Length < 1 || !Regex.IsMatch(e.TenDangNhap, "^[a-zA-Z0-9 ]*$"))
+        //        {
+        //            ModelState.AddModelError(String.Empty, "Tên Đăng Nhập không hợp lệ");
+        //        }
+
+        //        if (String.IsNullOrEmpty(e.HoTenKH) || e.HoTenKH.Length < 1)
+        //        {
+        //            ModelState.AddModelError(String.Empty, "Họ Và Tên không hợp lệ");
+        //        }
+
+        //        if (String.IsNullOrEmpty(e.Email) || !e.Email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase))
+        //        {
+        //            ModelState.AddModelError(String.Empty, "Email không hợp lệ. Vui lòng nhập lại email");
+        //        }
+
+        //        return View(e);
+        //    }
+
+        //    database.Dispose();
+        //    return RedirectToAction("QuanLyUser");
+        //}
         public ActionResult SuaUser(int Id)
         {
-            XemPhimEntities database = new XemPhimEntities();
-            KhachHang e = database.KhachHang.Where(i => i.MaKH == Id).FirstOrDefault();
-
-            if (e != null)
+            using (XemPhimEntities database = new XemPhimEntities())
             {
-                // Kiểm tra hợp lệ cho email, họ tên và tên đăng nhập
-                if (String.IsNullOrEmpty(e.TenDangNhap) || e.TenDangNhap.Length < 1 || !Regex.IsMatch(e.TenDangNhap, "^[a-zA-Z0-9 ]*$"))
+                KhachHang e = database.KhachHang.FirstOrDefault(i => i.MaKH == Id);
+
+                if (e != null)
                 {
-                    ModelState.AddModelError(String.Empty, "Tên Đăng Nhập không hợp lệ");
+                    ValidateUser(e);
+
+                    return View(e);
                 }
 
-                if (String.IsNullOrEmpty(e.HoTenKH) || e.HoTenKH.Length < 1)
-                {
-                    ModelState.AddModelError(String.Empty, "Họ Và Tên không hợp lệ");
-                }
-
-                if (String.IsNullOrEmpty(e.Email) || !e.Email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase))
-                {
-                    ModelState.AddModelError(String.Empty, "Email không hợp lệ. Vui lòng nhập lại email");
-                }
-
-                return View(e);
+                return RedirectToAction("QuanLyUser");
             }
-
-            database.Dispose();
-            return RedirectToAction("QuanLyUser");
         }
 
+        private void ValidateUser(KhachHang user)
+        {
+            if (String.IsNullOrEmpty(user.TenDangNhap) || user.TenDangNhap.Length < 1 || !Regex.IsMatch(user.TenDangNhap, "^[a-zA-Z0-9 ]*$"))
+            {
+                ModelState.AddModelError(String.Empty, "Tên Đăng Nhập không hợp lệ");
+            }
+
+            if (String.IsNullOrEmpty(user.HoTenKH) || user.HoTenKH.Length < 1)
+            {
+                ModelState.AddModelError(String.Empty, "Họ Và Tên không hợp lệ");
+            }
+
+            if (String.IsNullOrEmpty(user.Email) || !user.Email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase))
+            {
+                ModelState.AddModelError(String.Empty, "Email không hợp lệ. Vui lòng nhập lại email");
+            }
+        }
+        public void Update(KhachHang khachHang)
+        {
+            // Xử lý cập nhật khi có thay đổi
+            // Ví dụ: gửi email hoặc cập nhật dữ liệu khác
+        }
         public ActionResult LuuUser(KhachHang s)
         {
             XemPhimEntities database = new XemPhimEntities();
