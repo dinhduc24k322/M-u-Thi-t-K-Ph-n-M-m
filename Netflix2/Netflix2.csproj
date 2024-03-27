@@ -136,6 +136,8 @@
     <Compile Include="Controllers\Factory Method\IPhimFactory.cs" />
     <Compile Include="Controllers\Factory Method\PhimFactory.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Iterator\InterfaceIterator.cs" />
+    <Compile Include="Controllers\Iterator\PhimIterator.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />
     <Compile Include="Controllers\Decorator\EmailFormatValidationDecorator.cs" />
     <Compile Include="Controllers\Decorator\EmailValidationDecorator.cs" />
