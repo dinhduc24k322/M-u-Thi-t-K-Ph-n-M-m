@@ -147,6 +147,10 @@
     <Compile Include="Controllers\Decorator\UsernameValidationDecorator.cs" />
     <Compile Include="Controllers\Observer\IKhachHangObserver.cs" />
     <Compile Include="Controllers\Observer\KhachHangSubject.cs" />
+    <Compile Include="Controllers\Program.cs" />
+    <Compile Include="Controllers\Proxy\IMoviePlayer.cs" />
+    <Compile Include="Controllers\Proxy\MoviePlayerProxy.cs" />
+    <Compile Include="Controllers\Proxy\RealMoviePlayer.cs" />
     <Compile Include="Controllers\Responsitory\KhachHangRepository.cs" />
     <Compile Include="Controllers\Singleton\AuthManager.cs" />
     <Compile Include="Controllers\Strategy\ISearchStrategy.cs" />
