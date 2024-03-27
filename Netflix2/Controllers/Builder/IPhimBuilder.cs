@@ -19,5 +19,6 @@ namespace Netflix2.Pattern.Builder
         PhimBuilder setChiTietPhim(string chitietphim);
         PhimBuilder setDienVien(string dienvien);
         PhimBuilder setDaoDien(string daodien);
+
     }
 }

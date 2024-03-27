@@ -34,5 +34,6 @@ namespace Netflix2.Pattern.Singleton
             return db.KhachHang.FirstOrDefault(u => u.TenDangNhap == tendangnhap && u.MatKhau == matkhau);
         }
 
+
     }
 }
