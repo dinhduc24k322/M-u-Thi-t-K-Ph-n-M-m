@@ -2,7 +2,7 @@
 
 namespace Proxy_Trình_chiếu_xem_phim
 {
-    class Program
+    public class TrinhChieuXemPhim
     {
         static void Main(string[] args)
         {
