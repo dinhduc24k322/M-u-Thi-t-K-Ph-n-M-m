@@ -129,6 +129,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\Builder\IPhimBuilder.cs" />
+    <Compile Include="Controllers\Builder\PhimBuilder.cs" />
     <Compile Include="Controllers\Command\IUserCommand.cs" />
     <Compile Include="Controllers\Command\SaveUserCommand.cs" />
     <Compile Include="Controllers\Factory Method\IPhimFactory.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Controllers\Observer\IKhachHangObserver.cs" />
     <Compile Include="Controllers\Observer\KhachHangSubject.cs" />
     <Compile Include="Controllers\Responsitory\KhachHangRepository.cs" />
+    <Compile Include="Controllers\Singleton\AuthManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
