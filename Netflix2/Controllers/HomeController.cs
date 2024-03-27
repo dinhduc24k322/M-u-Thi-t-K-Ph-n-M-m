@@ -69,5 +69,6 @@ namespace Netflix2.Controllers
             //return View(database.Phim.Where(x => x.TenPhim.Contains(searching) || searching == null).ToList());
         }
 
+
     }
 }

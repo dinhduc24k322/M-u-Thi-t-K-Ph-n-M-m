@@ -35,5 +35,6 @@ namespace Netflix2.Pattern.Singleton
         }
 
 
+
     }
 }

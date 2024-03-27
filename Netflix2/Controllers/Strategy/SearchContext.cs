@@ -25,5 +25,6 @@ namespace Netflix2.Controllers.Strategy
             return _searchStrategy.Search(searchString, database);
         }
 
+
     }
 }

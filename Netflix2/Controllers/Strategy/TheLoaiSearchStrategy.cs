@@ -13,5 +13,6 @@ namespace Netflix2.Controllers.Strategy
             return database.Phim.Where(p => p.TheLoai.Contains(searchString)).ToList();
         }
 
+
     }
 }

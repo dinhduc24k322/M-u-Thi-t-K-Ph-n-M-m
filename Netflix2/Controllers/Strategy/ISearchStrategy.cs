@@ -18,5 +18,6 @@ namespace Netflix2.Controllers.Strategy
             return database.Phim.Where(p => p.TenPhim.Contains(searchString)).ToList();
         }
 
+
     }
 }
