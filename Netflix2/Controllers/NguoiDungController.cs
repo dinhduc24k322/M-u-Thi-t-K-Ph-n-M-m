@@ -75,6 +75,7 @@ namespace Netflix2.Controllers
                 {
 
 
+
                     //var khach = database.KhachHang.FirstOrDefault(k => k.TenDangNhap == kh.TenDangNhap && k.MatKhau == kh.MatKhau);
                     var khach = AuthManager.Instance.AuthenticaseKhachhang(kh.TenDangNhap, kh.MatKhau);
                     if (khach != null)
