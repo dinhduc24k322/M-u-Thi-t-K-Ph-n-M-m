@@ -1,4 +1,5 @@
 ﻿using Netflix2.Controllers.Command;
+using Netflix2.Controllers.Iterator;
 using Netflix2.Controllers.Observer;
 using Netflix2.Controllers.Responsitory;
 using Netflix2.Models;
@@ -28,13 +29,24 @@ namespace Netflix2.Controllers
         }
         public ActionResult QuanLyPhim()
         {
-            using (var dbContext = new XemPhimEntities())
-            {
-                
-                var items = dbContext.Phim.ToList();
+            //using (var dbContext = new XemPhimEntities())
+            //{
 
-                return View(items);
+            //    var items = dbContext.Phim.ToList();
+
+            //    return View(items);
+            //}
+            var phimList = database.Phim.ToList();
+            var phimIterator = new PhimIterator(phimList);
+            // lấy từng bộ phim trong danh sách phim 
+            var items = new List<Phim>();
+            while (phimIterator.HasNext())
+            {
+                items.Add((Phim)phimIterator.Next());
+
             }
+            return View(items);
+
         }
 
         public ActionResult AddPhim(Phim phim)
