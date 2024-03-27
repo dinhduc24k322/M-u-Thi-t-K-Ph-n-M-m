@@ -1,8 +1,5 @@
 ﻿using Netflix2.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Netflix2.Controllers.Strategy
 {
@@ -24,8 +21,6 @@ namespace Netflix2.Controllers.Strategy
         {
             return _searchStrategy.Search(searchString, database);
         }
-
-
-
     }
+
 }

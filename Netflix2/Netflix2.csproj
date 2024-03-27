@@ -128,6 +128,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Adapter\IVideoPlayer.cs" />
+    <Compile Include="Controllers\Adapter\LegacyVideoPlayer.cs" />
+    <Compile Include="Controllers\Adapter\VideoPlayerAdapter.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Builder\IPhimBuilder.cs" />
     <Compile Include="Controllers\Builder\PhimBuilder.cs" />
@@ -147,15 +150,16 @@
     <Compile Include="Controllers\Decorator\UsernameValidationDecorator.cs" />
     <Compile Include="Controllers\Observer\IKhachHangObserver.cs" />
     <Compile Include="Controllers\Observer\KhachHangSubject.cs" />
-    <Compile Include="Controllers\Program.cs" />
+    <Compile Include="Controllers\Strategy\ISearchStrategy.cs" />
+    <Compile Include="Controllers\Strategy\SearchContext.cs" />
+    <Compile Include="Controllers\Strategy\TenPhimSearchStrategy.cs" />
+    <Compile Include="Controllers\TrinhChieuXemPhim.cs" />
+    <Compile Include="Controllers\ChuyenDoiDinhDangVideo.cs" />
     <Compile Include="Controllers\Proxy\IMoviePlayer.cs" />
     <Compile Include="Controllers\Proxy\MoviePlayerProxy.cs" />
     <Compile Include="Controllers\Proxy\RealMoviePlayer.cs" />
     <Compile Include="Controllers\Responsitory\KhachHangRepository.cs" />
     <Compile Include="Controllers\Singleton\AuthManager.cs" />
-    <Compile Include="Controllers\Strategy\ISearchStrategy.cs" />
-    <Compile Include="Controllers\Strategy\SearchContext.cs" />
-    <Compile Include="Controllers\Strategy\TheLoaiSearchStrategy.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

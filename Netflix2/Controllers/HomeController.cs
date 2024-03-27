@@ -10,14 +10,19 @@ namespace Netflix2.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly XemPhimEntities _database;
-        private readonly SearchContext _searchContext;
-        XemPhimEntities database = new XemPhimEntities();
+        private XemPhimEntities _database;
+        private SearchContext _searchContext;
+
+
         public HomeController()
         {
             _database = new XemPhimEntities();
             _searchContext = new SearchContext(new TenPhimSearchStrategy());
         }
+
+
+        XemPhimEntities database = new XemPhimEntities();
+        
         public ActionResult TrangChu()
         {
             using (var dbContext = new XemPhimEntities())
@@ -62,11 +67,11 @@ namespace Netflix2.Controllers
             var Phim = database.Phim.FirstOrDefault(s => s.IdPhim == Id);
             return View(Phim);
         }
-        public ActionResult TimKiem(string searchString)
+        public ActionResult TimKiem(string searching)
         {
-            List<Phim> searchResults = _searchContext.Search(searchString, _database);
-            return View(searchResults);
-            //return View(database.Phim.Where(x => x.TenPhim.Contains(searching) || searching == null).ToList());
+
+            
+            return View(database.Phim.Where(x => x.TenPhim.Contains(searching) || searching == null).ToList());
         }
 
 
