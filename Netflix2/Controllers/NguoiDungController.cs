@@ -1,4 +1,5 @@
 ﻿using Netflix2.Models;
+using Netflix2.Pattern.Singleton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,7 +73,11 @@ namespace Netflix2.Controllers
                     return RedirectToAction("QuanLyPhim", "Admin");
                 if (ModelState.IsValid)
                 {
-                    var khach = database.KhachHang.FirstOrDefault(k => k.TenDangNhap == kh.TenDangNhap && k.MatKhau == kh.MatKhau);
+
+
+
+                    //var khach = database.KhachHang.FirstOrDefault(k => k.TenDangNhap == kh.TenDangNhap && k.MatKhau == kh.MatKhau);
+                    var khach = AuthManager.Instance.AuthenticaseKhachhang(kh.TenDangNhap, kh.MatKhau);
                     if (khach != null)
                     {
                         ViewBag.Thongbao = "Chúc mừng đăng nhập thành công";

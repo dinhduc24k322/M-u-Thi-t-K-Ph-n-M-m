@@ -1,4 +1,5 @@
-﻿using Netflix2.Models;
+﻿using Netflix2.Controllers.Strategy;
+using Netflix2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,14 @@ namespace Netflix2.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly XemPhimEntities _database;
+        private readonly SearchContext _searchContext;
         XemPhimEntities database = new XemPhimEntities();
+        public HomeController()
+        {
+            _database = new XemPhimEntities();
+            _searchContext = new SearchContext(new TenPhimSearchStrategy());
+        }
         public ActionResult TrangChu()
         {
             using (var dbContext = new XemPhimEntities())
@@ -19,6 +27,7 @@ namespace Netflix2.Controllers
                 return View(items);
             }
         }
+
 
         public ActionResult TvShow()
         {
@@ -53,9 +62,14 @@ namespace Netflix2.Controllers
             var Phim = database.Phim.FirstOrDefault(s => s.IdPhim == Id);
             return View(Phim);
         }
-        public ActionResult TimKiem(string searching)
+        public ActionResult TimKiem(string searchString)
         {
-            return View(database.Phim.Where(x => x.TenPhim.Contains(searching) || searching == null).ToList());
+            List<Phim> searchResults = _searchContext.Search(searchString, _database);
+            return View(searchResults);
+            //return View(database.Phim.Where(x => x.TenPhim.Contains(searching) || searching == null).ToList());
         }
+
+
+
     }
 }
